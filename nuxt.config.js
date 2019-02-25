@@ -50,6 +50,10 @@ module.exports = {
   modules: [],
   build: {
     /*
+    ** Add all commons packages
+    */
+    vendor: [],
+    /*
     ** Run ESLint on save
     */
     extend(config, { isDev, isClient }) {
