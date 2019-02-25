@@ -31,8 +31,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .bpDebug
-    position fixed
-    top 0
-    left 0
+@import '~@/assets/styles/mixins'
+
+.bpDebug
+  position fixed
+  top 0
+  left 0
+  font()
 </style>

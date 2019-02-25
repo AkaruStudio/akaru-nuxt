@@ -1,0 +1,46 @@
+@import './variables'
+
+centered()
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+
+flex-parent-center()
+  display flex
+  justify-content center
+  align-items center
+
+hidden()
+  visibility hidden
+  opacity 0
+
+shown()
+  visibility visible
+  opacity 1
+
+/**
+* Text
+*/
+
+fsz(value)
+  font-size value px
+  font-size (value / root-font-size) rem
+
+font(ff = roboto-ff, fsz = 16, fw = 400, fs = normal)
+  font-family ff
+  fsz(fsz)
+  font-weight fw
+  font-style fs
+
+title()
+  font(roboto-ff, 50, 700, normal)
+
+subtitle()
+  font(roboto-ff, 30, 300, normal)
+
+text()
+  font(roboto-ff, 16, 400, normal)
+
+text-italic()
+  font(roboto-ff, 16, 400, italic)
