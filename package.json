@@ -17,6 +17,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@nuxtjs/sitemap": "^0.2.0",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
