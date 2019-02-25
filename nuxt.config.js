@@ -70,7 +70,15 @@ module.exports = {
       }
 
       /*
-      ** process shader files
+      ** Add better devtool config
+      ** https://webpack.js.org/configuration/devtool/
+      */
+      if (isDev) {
+        config.devtool = 'cheap-module-eval-source-map'
+      }
+
+      /*
+      ** Process shader files
       */
       config.module.rules.push({
         test: /\.(glsl|frag|vert)$/,
