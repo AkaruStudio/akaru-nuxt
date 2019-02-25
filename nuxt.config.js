@@ -9,6 +9,9 @@ module.exports = {
   */
   head: {
     title: 'akaru-nuxt',
+    htmlAttrs: {
+      lang: 'fr'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
