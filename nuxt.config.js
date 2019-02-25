@@ -94,6 +94,16 @@ module.exports = {
           }
         }
       })
+
+      /*
+      ** Add more aliases
+      */
+      config.resolve.alias = Object.assign({}, config.resolve.alias, {
+        components: path.resolve('./components'),
+        mixins: path.resolve('./mixins'),
+        plugins: path.resolve('./plugins'),
+        store: path.resolve('./store')
+      })
     }
   }
 }
