@@ -53,10 +53,10 @@ module.exports = {
     ** Add all commons packages
     */
     vendor: [],
-    /*
-    ** Run ESLint on save
-    */
     extend(config, { isDev, isClient }) {
+      /*
+      ** Run ESLint on save
+      */
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -68,6 +68,15 @@ module.exports = {
           }
         })
       }
+
+      /*
+      ** process shader files
+      */
+      config.module.rules.push({
+        test: /\.(glsl|frag|vert)$/,
+        use: ['raw-loader'],
+        exclude: /node_modules/
+      })
     }
   }
 }
