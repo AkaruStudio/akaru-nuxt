@@ -50,6 +50,10 @@ module.exports = {
   ** Build configuration
   */
   modules: [],
+  plugins: [{
+    src: '~/plugins/EventBus.js',
+    ssr: false
+  }],
   build: {
     /*
     ** Add all commons packages
