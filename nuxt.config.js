@@ -105,5 +105,6 @@ module.exports = {
         store: path.resolve('./store')
       })
     }
-  }
+  },
+  css: ['@/assets/styles/index.scss']
 }
