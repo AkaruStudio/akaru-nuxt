@@ -1,13 +1,13 @@
 <template>
   <div>
-    <nuxt/>
+    <nuxt />
   </div>
 </template>
 
 <script>
-import 'intersection-observer'
+if (process.browser) {
+  require('intersection-observer')
+}
+
+export default {}
 </script>
-
-
-<style>
-</style>
