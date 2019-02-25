@@ -1,9 +1,17 @@
 <template>
-  <section />
+  <section>
+    <h1>{{ bp }}</h1>
+  </section>
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    bp () {
+      return this.$store.state.window.breakpoint
+    }
+  }
+}
 </script>
 
 <style></style>
