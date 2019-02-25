@@ -26,6 +26,8 @@ package-lock.json
 # VSCode history plugin
 .history
 
+static/sitemap.xml
+
 
 ###
 #

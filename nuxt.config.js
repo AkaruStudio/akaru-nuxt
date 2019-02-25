@@ -47,6 +47,7 @@ module.exports = {
   /*
   ** Build configuration
   */
+  modules: [],
   build: {
     /*
     ** Run ESLint on save
