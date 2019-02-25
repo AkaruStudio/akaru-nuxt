@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@nuxtjs/sitemap": "^0.2.0",
+    "intersection-observer": "^0.5.1",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
