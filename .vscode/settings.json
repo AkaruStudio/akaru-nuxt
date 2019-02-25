@@ -16,5 +16,6 @@
         "language": "javascript",
         "autoFix": true
       }
-    ]
+    ],
+    "eslint.enable": true
 }

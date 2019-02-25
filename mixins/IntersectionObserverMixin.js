@@ -40,7 +40,7 @@ export default {
     onIntersect (el) {
       el.classList.add('in-view')
     },
-    onIntersectLeave () {
+    onIntersectLeave (el) {
       el.classList.remove('in-view')
     }
   }
