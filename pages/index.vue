@@ -5,13 +5,13 @@
 <script>
 export default {
   mounted () {
-    this.$e.on('mousemove', () => {
-      console.log('mousemove de la page')
+    this.$e.on('raf', ({ dt }) => {
+      console.log('tick', dt)
     })
 
     window.setTimeout(() => {
-      this.$e.off('mousemove')
-    }, 3000)
+      this.$e.off('raf')
+    }, 2000)
   }
 }
 </script>
