@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   debug: true,
   /*
@@ -114,5 +116,5 @@ module.exports = {
       })
     }
   },
-  css: ['@/assets/styles/index.scss']
+  css: ['@/assets/styles/index.styl']
 }

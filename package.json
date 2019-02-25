@@ -17,16 +17,19 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/sitemap": "^0.2.0",
     "intersection-observer": "^0.5.1",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
+    "@nuxtjs/sitemap": "^0.2.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.14.1",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^5.2.2",
+    "raw-loader": "^1.0.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
     "vue-svg-loader": "^0.12.0"
   }
 }
