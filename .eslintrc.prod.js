@@ -18,10 +18,10 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    "no-unused-vars": ["warn"],
-    "no-console": ["warn"],
-    "no-undef": ["error"],
+    "no-unused-vars": ["error"],
+    "no-console": ["error"],
     "space-before-function-paren": ["error", "always"],
+    "no-undef": "error",
     "indent": ["error", 2],
     "padded-blocks": ["error", "never"],
     "space-in-parens": ["error", "never"],

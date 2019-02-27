@@ -1,19 +1,51 @@
 const path = require('path')
 
-module.exports = {
+// all deploy configs per environment
+const PER_DEPLOY_ENV_CONFIGS = {
+  base: {
+    server: {
+      port: 3000,
+      host: '0.0.0.0'
+    }
+  },
+  preprod: {
+    server: {
+      host: 'http://clients.akaru.fr/my-project'
+    }
+  },
+  prod: {
+    server: {
+      host: 'http://my-project.fr'
+    }
+  }
+}
+
+// get deploy environment
+const deployEnvironment = process.env.DEPLOY_ENV || 'base'
+const isPreprod = deployEnvironment === 'preprod'
+const isProd = deployEnvironment === 'prod'
+
+// get deploy environment config
+const deployEnvironementConfig = PER_DEPLOY_ENV_CONFIGS[deployEnvironment]
+
+/**
+ * Metas
+ */
+const title = 'Akaru Nuxt template'
+const description = 'Nuxt template by Akaru Studio'
+const url = `${deployEnvironementConfig.server.host}${(deployEnvironementConfig.server.port) ? ':' + deployEnvironementConfig.server.port : ''}`
+
+let config = {
   debug: true,
   /*
   ** Dev server configuration
   */
-  server: {
-    port: 3000,
-    host: '0.0.0.0'
-  },
+  sevrer: deployEnvironementConfig.server,
   /*
   ** Headers of the page
   */
   head: {
-    title: 'akaru-nuxt',
+    title,
     htmlAttrs: {
       lang: 'fr'
     },
@@ -21,16 +53,16 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0' },
       { 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },
-      { hid: 'description', name: 'description', content: 'Nuxt template by Akaru Studio' },
+      { hid: 'description', name: 'description', content: description },
       /*
       ** OG share properties
       */
       { property: 'og:site_name', content: 'My project' },
-      { hid: 'og:title', property: 'og:title', content: 'My project' },
-      { hid: 'og:url', property: 'og:url', content: 'http://www.my-project.fr' },
-      { hid: 'og:image', property: 'og:image', content: 'http://www.my-project.fr/share.jpg' },
-      { hid: 'og:description', property: 'og:description', content: 'Nuxt template by Akaru Studio' },
-      { property: 'og:locale', content: 'fr_FR' },
+      { hid: 'og:title', property: 'og:title', content: title },
+      { hid: 'og:url', property: 'og:url', content: url },
+      { hid: 'og:image', property: 'og:image', content: `${url}/share.jpg` },
+      { hid: 'og:description', property: 'og:description', content: description },
+      { hid: 'og:locale', property: 'og:locale', content: 'fr_FR' },
       /*
       ** Twitter share properties
       */
@@ -63,15 +95,16 @@ module.exports = {
       /*
       ** Run ESLint on save
       */
-      if (isDev && isClient) {
+      if (isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
           options: {
-            fix: true
-          }
+            fix: isDev,
+            configFile: (isDev) ? path.resolve('./.eslintrc.js') : path.resolve('./.eslintrc.prod.js')
+          },
         })
       }
 
@@ -190,3 +223,17 @@ module.exports = {
   },
   css: ['@/assets/styles/index.styl']
 }
+
+if (isProd || isPreprod) {
+  config.modules.push('@nuxtjs/sitemap')
+  config.sitemap = {
+    path: '/sitemap.xml',
+    hostname: url,
+    generate: true,
+    // additional routes
+    routes: () => []
+  }
+}
+
+
+module.exports = config
