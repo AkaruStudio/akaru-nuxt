@@ -1,8 +1,32 @@
 {
   "name": "akaru-nuxt",
   "version": "1.0.0",
+  "license": "MIT",
   "description": "Nuxt template by Akaru Studio",
-  "author": "Quentin Neyraud <quentin.neyraud@gmail.com>",
+  "author": "Akaru Studio <contact@akaru.fr>",
+  "contributors": [
+    {
+      "name": "Quentin Neyraud",
+      "email": "quentin.neyraud@gmail.com",
+      "url": "https://twitter.com/quentin_neyraud"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Quentin Neyraud",
+      "email": "quentin.neyraud@gmail.com",
+      "url": "https://twitter.com/quentin_neyraud"
+    }
+  ],
+  "homepage": "https://github.com/AkaruStudio/akaru-nuxt/",
+  "readme": "https://github.com/AkaruStudio/akaru-nuxt/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AkaruStudio/akaru-nuxt/"
+  },
+  "bugs": {
+    "url": "https://github.com/AkaruStudio/akaru-nuxt/issues"
+  },
   "private": true,
   "scripts": {
     "dev": "nuxt",
