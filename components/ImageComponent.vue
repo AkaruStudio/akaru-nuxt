@@ -2,7 +2,7 @@
   <div
     class="imageComponent"
     :class="{
-      observe: lazyloadType === 'intersection',
+      'observe-once': lazyloadType === 'intersection',
       loading: lazyload
     }"
     :style="{background: background}">
@@ -68,8 +68,6 @@ export default {
         this.$refs.image.src = this.source
         this.$el.classList.remove('loading')
         this.$el.classList.add('loaded')
-
-        this.observer.unobserve(this.$el)
       }
 
       img.src = this.source
