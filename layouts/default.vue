@@ -21,7 +21,7 @@ export default {
     })
   },
   mounted () {
-    window.addEventListener('resize', () => {
+    this.$e.on('resize', () => {
       this.$store.dispatch('DETECT_BREAKPOINTS')
     })
 
