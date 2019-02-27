@@ -1,8 +1,8 @@
 <template>
   <div id="root">
-    <span class="bpDebug">
-      {{ bp }}
-    </span>
+    <!-- <span class="bpDebug">
+      breakpoint: {{ bp }}
+    </span> -->
     <nuxt />
   </div>
 </template>

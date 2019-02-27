@@ -1,3 +1,5 @@
+const CLASSES = ['observe', 'observe-once']
+
 export default {
   data () {
     return {
@@ -17,10 +19,21 @@ export default {
         threshold: 0.2
       }
 
-      let observedElements = Array.from(this.$el.querySelectorAll('.observe'))
-        .concat((this.$el.classList.contains('observe')) ? this.$el : [])
+      let observedElements = []
+
+      // construct css selector from CLASSES
+      let cssSelector = CLASSES.map(className => `.${className}`).join(', ')
+
+      // observe all elements that have one class from CLASSES
+      observedElements.push(...Array.from(this.$el.querySelectorAll(cssSelector)))
+
+      // observe component top tag if it contains one class from CLASSES
+      if (CLASSES.some(className => this.$el.classList.contains(className))) {
+        observedElements.push(this.$el)
+      }
 
       if (observedElements.length > 0) {
+        // construct observer
         this.observer = new window.IntersectionObserver((intersections) => {
           intersections.forEach(intersection => {
             if (intersection.isIntersecting) {
@@ -31,7 +44,7 @@ export default {
           })
         }, options)
 
-        observedElements.forEach(el => this.observe.observe(el))
+        observedElements.forEach(el => this.observer.observe(el))
       }
     },
     unobserve (el) {
@@ -39,6 +52,10 @@ export default {
     },
     onIntersect (el) {
       el.classList.add('in-view')
+
+      if (el.classList.contains('observe-once')) {
+        this.observer.unobserve(el)
+      }
     },
     onIntersectLeave (el) {
       el.classList.remove('in-view')
