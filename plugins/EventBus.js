@@ -17,6 +17,18 @@ const constructEventObject = (event) => {
   return e
 }
 
+// https://stackoverflow.com/questions/9368538/getting-an-array-of-all-dom-events-possible
+const DOM_EVENTS = Object.getOwnPropertyNames(document)
+  .concat(Object.getOwnPropertyNames(Object.getPrototypeOf(Object.getPrototypeOf(document))))
+  .concat(Object.getOwnPropertyNames(Object.getPrototypeOf(window)))
+  .filter(i => !i.indexOf('on') && (document[i] == null || typeof document[i] == 'function'))
+  .filter((elem, pos, self) => self.indexOf(elem) == pos)
+  .map(eventName => eventName.substr(2))
+
+const isDomEvent = (eventName) => {
+  return [...DOM_EVENTS, 'raf'].indexOf(eventName.toLowerCase()) === -1
+}
+
 const eventBus = new Vue({
   data () {
     return {
@@ -26,6 +38,12 @@ const eventBus = new Vue({
   },
   methods: {
     on (event, cb) {
+      // custom events, use native $on
+      if (typeof event === 'string' && isDomEvent(event)) {
+        this.$on(event, cb)
+        return
+      }
+
       event = constructEventObject(event)
 
       if (this.events[event.eventName]) {
@@ -45,6 +63,12 @@ const eventBus = new Vue({
       }
     },
     off (event, cb = null) {
+      // custom events, use native $on
+      if (typeof event === 'string' && isDomEvent(event)) {
+        this.$off(event, cb)
+        return
+      }
+
       event = constructEventObject(event)
 
       if (!this.events[event.eventName]) return

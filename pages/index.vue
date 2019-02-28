@@ -33,7 +33,16 @@ export default {
     //   console.log('tick', dt)
     // })
 
-    // this.$e.on('click', () => console.log('click'))
+    // window event
+    this.$e.on('click', () => console.log('click'))
+
+    // custom event
+    this.$e.on('say_hi', (name) => console.log(`Hello ${name}`))
+    this.$e.$emit('say_hi', 'Akaru')
+  },
+  beforeDestroy () {
+    this.$e.off('click')
+    this.$e.off('say_hi')
   }
 }
 </script>
