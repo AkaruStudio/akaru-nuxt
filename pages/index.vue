@@ -21,6 +21,7 @@
 import AkaruIcon from '~/assets/svg/akaru.svg'
 import NuxtIcon from '~/assets/svg/nuxt.svg'
 import IntersectionObserverMixin from '~/mixins/IntersectionObserverMixin.js'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -28,17 +29,37 @@ export default {
     NuxtIcon
   },
   mixins: [IntersectionObserverMixin],
+  computed: {
+    ...mapGetters(['isLoading'])
+  },
+  watch: {
+    isLoading (isLoading) {
+      console.log('isLoading:', isLoading)
+    }
+  },
   mounted () {
-    // this.$e.on('raf', ({ dt }) => {
-    //   console.log('tick', dt)
-    // })
-
+    /**
+     * EventBus plugin usage
+     */
     // window event
     this.$e.on('click', () => console.log('click'))
+    this.$e.on('raf', ({ dt }) => {
+      // console.log('tick', dt)
+    })
 
     // custom event
     this.$e.on('say_hi', (name) => console.log(`Hello ${name}`))
     this.$e.$emit('say_hi', 'Akaru')
+
+    /**
+     * Vuex loading module usage
+     */
+    this.$store.dispatch('ADD_PENDING_REQUEST')
+
+    // simulate API call
+    window.setTimeout(() => {
+      this.$store.dispatch('REMOVE_PENDING_REQUEST')
+    }, 1500)
   },
   beforeDestroy () {
     this.$e.off('click')
