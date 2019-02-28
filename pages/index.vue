@@ -40,15 +40,20 @@ export default {
 
 <style lang="stylus" scoped>
   @import '~@/assets/styles/mixins.styl'
+  @import '~@/assets/styles/breakpoints.styl'
 
   #home
     height 100vh
 
   .title
     title()
-    fsz(70)
+    fsz(30)
     color #aaa
     margin-top 150px
+
+    // breakpoints
+    +large-up()
+      fsz(70)
 
   .collab
     margin-top 100px
