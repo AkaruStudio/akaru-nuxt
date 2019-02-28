@@ -26,7 +26,7 @@ const DOM_EVENTS = Object.getOwnPropertyNames(document)
   .map(eventName => eventName.substr(2))
 
 const isDomEvent = (eventName) => {
-  return [...DOM_EVENTS, 'raf'].indexOf(eventName.toLowerCase()) === -1
+  return [...DOM_EVENTS, 'raf'].indexOf(eventName.toLowerCase()) > -1
 }
 
 const eventBus = new Vue({
@@ -39,7 +39,7 @@ const eventBus = new Vue({
   methods: {
     on (event, cb) {
       // custom events, use native $on
-      if (typeof event === 'string' && isDomEvent(event)) {
+      if (typeof event === 'string' && !isDomEvent(event)) {
         this.$on(event, cb)
         return
       }
@@ -64,7 +64,7 @@ const eventBus = new Vue({
     },
     off (event, cb = null) {
       // custom events, use native $on
-      if (typeof event === 'string' && isDomEvent(event)) {
+      if (typeof event === 'string' && !isDomEvent(event)) {
         this.$off(event, cb)
         return
       }
