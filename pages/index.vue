@@ -13,6 +13,16 @@
 
         <akaru-icon class="akaru-icon" />
       </div>
+
+      <div class="row">
+        <image-component
+          ref="image"
+          source="http://placecorgi.com/260/180"
+          alt="image"
+          :lazyload="true"
+          lazyload-type="called"
+          @loaded="onImageLoaded" />
+      </div>
     </div>
   </main>
 </template>
@@ -21,12 +31,14 @@
 import AkaruIcon from '~/assets/svg/akaru.svg'
 import NuxtIcon from '~/assets/svg/nuxt.svg'
 import IntersectionObserverMixin from '~/mixins/IntersectionObserverMixin.js'
+import ImageComponent from '~/components/ImageComponent.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     AkaruIcon,
-    NuxtIcon
+    NuxtIcon,
+    ImageComponent
   },
   mixins: [IntersectionObserverMixin],
   computed: {
@@ -60,10 +72,19 @@ export default {
     window.setTimeout(() => {
       this.$store.dispatch('REMOVE_PENDING_REQUEST')
     }, 1500)
+
+    window.setTimeout(() => {
+      this.$refs.image.lazyloadImage()
+    }, 1500)
   },
   beforeDestroy () {
     this.$e.off('click')
     this.$e.off('say_hi')
+  },
+  methods: {
+    onImageLoaded () {
+      console.log('image loaded')
+    }
   }
 }
 </script>

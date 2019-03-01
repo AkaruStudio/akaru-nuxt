@@ -1,9 +1,8 @@
 <template>
   <div
-    class="imageComponent"
+    class="imageComponent loading"
     :class="{
-      'observe-once': lazyloadType === 'intersection',
-      loading: lazyload
+      'observe-once': lazyloadType === 'intersection'
     }"
     :style="{background: background}">
     <img
@@ -55,9 +54,20 @@ export default {
       validator: (value) => ['direct', 'intersection', 'called'].indexOf(value) > -1
     }
   },
+  data () {
+    return {
+      loaded: false
+    }
+  },
   mounted () {
     if (this.lazyload && this.lazyloadType === 'direct') {
       this.lazyloadImage()
+    }
+
+    if (this.$refs.image.src && this.$refs.image.complete) {
+      this.onLoaded()
+    } else {
+      this.$refs.image.addEventListener('load', this.onLoaded)
     }
   },
   methods: {
@@ -66,7 +76,6 @@ export default {
 
       img.onload = () => {
         this.$refs.image.src = this.source
-        this.$el.classList.remove('loading')
         this.$el.classList.add('loaded')
       }
 
@@ -74,6 +83,11 @@ export default {
     },
     onIntersect () {
       this.lazyloadImage()
+    },
+    onLoaded () {
+      this.$emit('loaded')
+      this.loaded = true
+      this.$el.classList.remove('loading')
     }
   }
 }
