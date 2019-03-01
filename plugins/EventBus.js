@@ -46,6 +46,7 @@ const eventBus = new Vue({
 
       event = constructEventObject(event)
 
+      // TODO: Vérifier aussi selon la target
       if (this.events[event.eventName]) {
         this.events[event.eventName].listeners.push(cb)
       } else {
