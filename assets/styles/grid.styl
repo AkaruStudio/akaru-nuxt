@@ -1,29 +1,27 @@
 @import './breakpoints'
 
 .container
-  width base-width
-  padding-left 30px
-  padding-right 30px
+  padding-left gutter-width
+  padding-right gutter-width
   margin-right auto
   margin-left auto
-  overflow-x hidden
+  width 100%
+  max-width base-width
 
   +mobile-up()
-    width mobile-width
+    max-width mobile-width
 
   +tablet-up()
-    width tablet-width
-    padding-left gutter-width
-    padding-right gutter-width
+    max-width tablet-width
 
   +desktop-up()
-    width desktop-width
+    max-width desktop-width
 
   +large-up()
-    width large-width
+    max-width large-width
 
   +xlarge-up()
-    width xlarge-width
+    max-width xlarge-width
 
 
 row()
