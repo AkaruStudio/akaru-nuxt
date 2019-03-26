@@ -128,10 +128,24 @@ let config = {
       /*
       ** SVG plugin
       */
+
+      // remove SVG extension from existing rule
       const svgRule = config.module.rules.find(rule => rule.test.test('.svg'))
       svgRule.test = /\.(png|jpe?g|gif|webp)$/
+
+      // svg files ending by '_clean.svg' will not be cleaned
+      config.module.rules.push({
+        test: /_clean\.svg$/,
+        loader: 'vue-svg-loader',
+        options: {
+          svgo: false
+        }
+      })
+
+      // all others SVG files are cleaned
       config.module.rules.push({
         test: /\.svg$/,
+        exclude: /_clean\.svg$/,
         loader: 'vue-svg-loader',
         options: {
           svgo: {
@@ -164,6 +178,8 @@ let config = {
             }, {
               removeViewBox: false,
             }, {
+              removeStyleElement: true
+            }, {
               cleanUpEnableBackground: true,
             }, {
               convertStyleToAttrs: true,
@@ -183,6 +199,8 @@ let config = {
               removeUnusedNS: true,
             }, {
               cleanupIDs: true,
+            }, {
+              inlineStyles: true
             }, {
               cleanupNumericValues: true,
             }, {
@@ -204,7 +222,7 @@ let config = {
             }, {
               removeDimensions: true,
             }, {
-              removeAttrs: { attrs: '(stroke)' },
+              removeAttrs: { attrs: '(stroke|fill)' },
             }]
           }
         }
