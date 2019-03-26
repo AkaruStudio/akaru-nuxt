@@ -40,7 +40,7 @@ let config = {
   /*
   ** Dev server configuration
   */
-  sevrer: deployEnvironementConfig.server,
+  server: deployEnvironementConfig.server,
   /*
   ** Headers of the page
   */
