@@ -98,8 +98,6 @@ export default {
 
   .title
     title()
-    fsz(30)
-    color #aaa
     margin-top 150px
 
     // breakpoints

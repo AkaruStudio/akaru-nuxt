@@ -27,20 +27,25 @@ fsz(value)
   font-size value px
   font-size (value / root-font-size) rem
 
-font(ff = roboto-ff, fsz = 16, fw = 400, fs = normal)
+font(ff = default-ff, fsz = 16, lh = 16, fw = 400, color = text-color, fs = normal)
   font-family ff
   fsz(fsz)
   font-weight fw
   font-style fs
+  color color
+  if lh == normal
+    line-height lh
+  else
+    line-height lh px
 
 title()
-  font(roboto-ff, 50, 700, normal)
+  font(roboto-ff, 30, normal, 700, title-color, normal)
 
 subtitle()
-  font(roboto-ff, 30, 300, normal)
+  font(roboto-ff, 30, normal, 300, text-color, normal)
 
 text()
-  font(roboto-ff, 16, 400, normal)
+  font(roboto-ff, 16, normal, 400, text-color, normal)
 
 text-italic()
-  font(roboto-ff, 16, 400, italic)
+  font(roboto-ff, 16, normal, 400, text-color, italic)
