@@ -9,13 +9,17 @@
       </div>
 
       <div class="row center collab observe-once">
-        <nuxt-icon class="nuxt-icon" />
+        <app-svg
+          name="nuxt_clean"
+          class="nuxt-icon" />
 
-        <akaru-icon class="akaru-icon" />
+        <app-svg
+          name="akaru_clean"
+          class="akaru-icon" />
       </div>
 
       <div class="row">
-        <image-component
+        <app-image
           ref="image"
           source="http://placecorgi.com/260/180"
           alt="image"
@@ -28,17 +32,15 @@
 </template>
 
 <script>
-import AkaruIcon from '~/assets/svg/akaru.svg'
-import NuxtIcon from '~/assets/svg/nuxt.svg'
 import IntersectionObserverMixin from '~/mixins/IntersectionObserverMixin.js'
-import ImageComponent from '~/components/ImageComponent.vue'
+import AppSvg from 'components/AppSvg.vue'
+import AppImage from 'components/AppImage.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    AkaruIcon,
-    NuxtIcon,
-    ImageComponent
+    AppSvg,
+    AppImage
   },
   mixins: [IntersectionObserverMixin],
   computed: {
