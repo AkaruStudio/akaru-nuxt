@@ -1,9 +1,9 @@
-const state = {
+export const state = () => ({
   pendingRequest: 0,
   assetsLoading: 0
-}
+})
 
-const mutations = {
+export const mutations = {
   UPDATE_ASSETS_LOADING (state, payload) {
     state.assetsLoading += payload
   },
@@ -12,7 +12,7 @@ const mutations = {
   }
 }
 
-const actions = {
+export const actions = {
   ADD_ASSET_LOADING ({ commit }) {
     commit('UPDATE_ASSETS_LOADING', 1)
   },
@@ -27,7 +27,7 @@ const actions = {
   }
 }
 
-const getters = {
+export const getters = {
   hasPendingRequest (state) {
     return state.pendingRequest > 0
   },
@@ -37,11 +37,4 @@ const getters = {
   isLoading (_, getters) {
     return getters.hasPendingRequest || getters.hasAssetsLoading
   }
-}
-
-export default {
-  state,
-  mutations,
-  actions,
-  getters
 }

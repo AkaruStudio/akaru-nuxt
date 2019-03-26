@@ -22,10 +22,10 @@ export default {
   },
   mounted () {
     this.$e.on('resize', () => {
-      this.$store.dispatch('DETECT_BREAKPOINTS')
+      this.$store.dispatch('window/DETECT_BREAKPOINTS')
     })
 
-    this.$store.dispatch('DETECT_ALL')
+    this.$store.dispatch('window/DETECT_ALL')
   }
 }
 </script>

@@ -42,7 +42,7 @@ export default {
   },
   mixins: [IntersectionObserverMixin],
   computed: {
-    ...mapGetters(['isLoading'])
+    ...mapGetters(['loading/isLoading'])
   },
   watch: {
     isLoading (isLoading) {
@@ -66,11 +66,11 @@ export default {
     /**
      * Vuex loading module usage
      */
-    this.$store.dispatch('ADD_PENDING_REQUEST')
+    this.$store.dispatch('loading/ADD_PENDING_REQUEST')
 
     // simulate API call
     window.setTimeout(() => {
-      this.$store.dispatch('REMOVE_PENDING_REQUEST')
+      this.$store.dispatch('loading/REMOVE_PENDING_REQUEST')
     }, 1500)
 
     window.setTimeout(() => {

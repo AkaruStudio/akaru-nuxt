@@ -18,7 +18,7 @@ const breakpoints = {
   xlarge: w => w >= 1440
 }
 
-const state = {
+export const state = () => ({
   width: null,
   height: null,
   webgl: null,
@@ -30,15 +30,15 @@ const state = {
   isDesktop: null,
   isLarge: null,
   isXlarge: null
-}
+})
 
-const mutations = {
+export const mutations = {
   SET_WINDOW_INFOS (state, additionalInfos) {
     state = Object.assign(state, additionalInfos)
   }
 }
 
-const actions = {
+export const actions = {
   DETECT_BREAKPOINTS ({ commit }) {
     let breakpoint = Object.keys(breakpoints)
       .reverse()
@@ -71,10 +71,4 @@ const actions = {
     dispatch('DETECT_BROWSER')
     dispatch('DETECT_WEBGL')
   }
-}
-
-export default {
-  state,
-  mutations,
-  actions
 }
