@@ -1,4 +1,6 @@
 const path = require('path')
+const fs = require('fs')
+var zipFolder = require('zip-folder')
 
 // all deploy configs per environment
 const PER_DEPLOY_ENV_CONFIGS = {
@@ -24,6 +26,12 @@ const PER_DEPLOY_ENV_CONFIGS = {
 const deployEnvironment = process.env.DEPLOY_ENV || 'base'
 const isPreprod = deployEnvironment === 'preprod'
 const isProd = deployEnvironment === 'prod'
+
+// get zip option
+let zip = false
+process.argv.forEach(function (val) {
+  if (val === '--zip') zip = true
+})
 
 // get deploy environment config
 const deployEnvironementConfig = PER_DEPLOY_ENV_CONFIGS[deployEnvironment]
@@ -86,6 +94,33 @@ let config = {
     src: '~/plugins/EventBus.js',
     ssr: false
   }],
+  hooks: {
+    generate: {
+      done () {
+        if (!zip) return
+
+        const date = new Date()
+        const padLeft = number => number < 10 ? `0${number}` : number
+        const outputZip = {
+          filename: `${date.getFullYear()}-${padLeft(date.getMonth() + 1)}-${padLeft(date.getDate())}_${padLeft(date.getHours())}:${padLeft(date.getMinutes())}.zip`,
+          folder: path.join('./zips')
+        }
+        outputZip.path = path.join(outputZip.folder, outputZip.filename)
+
+        if (!fs.existsSync(outputZip.folder)) {
+          fs.mkdirSync(outputZip.folder)
+        }
+
+        zipFolder(path.resolve('./dist'), outputZip.path, function (err) {
+          if(err) {
+            console.log('Error ziping dist', err)
+          } else {
+            console.log('Dist folder zipped to ' + outputZip.path)
+          }
+        })
+      }
+    }
+  },
   build: {
     /*
     ** Add all commons packages
@@ -103,7 +138,7 @@ let config = {
           exclude: /(node_modules)/,
           options: {
             fix: isDev,
-            configFile: (isDev) ? path.resolve('./.eslintrc.js') : path.resolve('./.eslintrc.prod.js')
+            configFile: (true) ? path.resolve('./.eslintrc.js') : path.resolve('./.eslintrc.prod.js')
           },
         })
       }

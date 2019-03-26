@@ -23,6 +23,11 @@ $ npm start
 $ npm run generate
 $ npm run generate:preprod
 $ npm run generate:prod
+
+# generate static project and create zip in ./zips folder
+$ npm run generate -- --zip
+$ npm run generate:preprod -- --zip
+$ npm run generate:prod -- --zip
 ```
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
