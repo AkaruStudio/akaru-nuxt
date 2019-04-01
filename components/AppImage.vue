@@ -11,7 +11,10 @@
       :src="!lazyload && source"
       :data-src="lazyload && source"
       :alt="alt"
-      :style="{objectFit: placement}">
+      :style="{
+        objectFit: placement,
+        objectPosition: position
+      }">
   </div>
 </template>
 
@@ -35,7 +38,12 @@ export default {
       type: String,
       required: false,
       default: () => 'cover',
-      validator: (value) => ['contain', 'cover', 'initial'].indexOf(value) > -1
+      validator: (value) => ['contain', 'cover', 'none'].indexOf(value) > -1
+    },
+    position: {
+      type: String,
+      required: false,
+      default: () => 'center'
     },
     background: {
       type: String,
@@ -96,8 +104,6 @@ export default {
 <style lang="stylus" scoped>
   .imageComponent
     position relative
-    height 100%
-    width 100%
     overflow hidden
     transition opacity 0.3s
 
