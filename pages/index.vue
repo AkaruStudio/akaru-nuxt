@@ -32,17 +32,27 @@
 </template>
 
 <script>
-import IntersectionObserverMixin from '~/mixins/IntersectionObserverMixin.js'
-import AppSvg from 'components/AppSvg.vue'
-import AppImage from 'components/AppImage.vue'
+import IntersectionObserverMixin from '~/mixins/IntersectionObserverMixin'
+import AppSvg from 'components/AppSvg'
+import AppImage from 'components/AppImage'
 import { mapGetters } from 'vuex'
+import MetasMixin from 'mixins/MetasMixin'
 
 export default {
   components: {
     AppSvg,
     AppImage
   },
-  mixins: [IntersectionObserverMixin],
+  mixins: [IntersectionObserverMixin, MetasMixin],
+  data () {
+    return {
+      metas: {
+        title: 'Home',
+        description: 'This is the home description',
+        image: require('assets/images/home/share.jpg')
+      }
+    }
+  },
   computed: {
     ...mapGetters(['loading/isLoading'])
   },

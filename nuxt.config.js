@@ -65,7 +65,7 @@ let config = {
       /*
       ** OG share properties
       */
-      { property: 'og:site_name', content: 'My project' },
+      { property: 'og:site_name', content: title },
       { hid: 'og:title', property: 'og:title', content: title },
       { hid: 'og:url', property: 'og:url', content: url },
       { hid: 'og:image', property: 'og:image', content: `${url}/share.jpg` },
