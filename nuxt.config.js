@@ -5,17 +5,20 @@ var zipFolder = require('zip-folder')
 // all deploy configs per environment
 const PER_DEPLOY_ENV_CONFIGS = {
   base: {
+    baseRouter: '/',
     server: {
       port: 3000,
       host: '0.0.0.0'
     }
   },
   preprod: {
+    baseRouter: '/my-project/',
     server: {
       host: 'http://clients.akaru.fr/my-project'
     }
   },
   prod: {
+    baseRouter: '/',
     server: {
       host: 'http://my-project.fr'
     }
@@ -87,6 +90,12 @@ let config = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
+  },
+  /*
+  ** Update router config
+  */
+  router: {
+    base: deployEnvironementConfig.baseRouter
   },
   /*
   ** Customize the progress bar color
