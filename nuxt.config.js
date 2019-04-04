@@ -50,6 +50,12 @@ let config = {
   */
   server: deployEnvironementConfig.server,
   /*
+  ** Environnment variables
+  */
+  env: {
+    URL: url
+  },
+  /*
   ** Headers of the page
   */
   head: {
