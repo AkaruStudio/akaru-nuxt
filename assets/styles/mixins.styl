@@ -33,19 +33,16 @@ font(ff = default-ff, fsz = 16, lh = 16, fw = 400, color = text-color, fs = norm
   font-weight fw
   font-style fs
   color color
-  if lh == normal
-    line-height lh
-  else
-    line-height lh px
+  line-height floor(lh/fsz, 2)
 
 title()
-  font(roboto-ff, 30, normal, 700, title-color, normal)
+  font(roboto-ff, 30, 32, 700, title-color, normal)
 
 subtitle()
-  font(roboto-ff, 30, normal, 300, text-color, normal)
+  font(roboto-ff, 30, 32, 300, text-color, normal)
 
 text()
-  font(roboto-ff, 16, normal, 400, text-color, normal)
+  font(roboto-ff, 16, 18, 400, text-color, normal)
 
 text-italic()
-  font(roboto-ff, 16, normal, 400, text-color, italic)
+  font(roboto-ff, 16, 18, 400, text-color, italic)
