@@ -78,7 +78,7 @@ export default {
 </style>
 ```
 
-#### stylus + grid
+#### Stylus + grid
 
 - all setup with grid system and breakpoints
 - customisable in `assets/styles/variables.styl`
@@ -91,7 +91,6 @@ export default {
   push(1)
   // font(font family, font size, line height, font weight, color, font style)
   font(Roboto, 30, 32, 700, red, italic)
-
 
   // mobile breakpoint
   +mobile-up()
@@ -107,7 +106,55 @@ export default {
 
 #### images + lazyload
 #### svg
+
+```vue
+<template>
+  <div>
+    <app-svg name="user" />
+  </div>
+</template>
+
+<script>
+import AppSvg from 'components/AppSvg'
+
+export default {
+  components: {
+    AppSvg
+  }
+}
+</script>
+
+```
+
 #### metas
+
+All metas are customisable in `nuxt.config.js`
+
+Can be updated per page :
+
+```vue
+<template>
+  <div>
+    <h1>About</h1>
+  </div>
+</template>
+
+<script>
+import MetasMixin from 'mixins/MetasMixin'
+
+export default {
+  mixins: [MetasMixin],
+  data () {
+    return {
+      title: 'My project - About',
+      description: 'This is the about page',
+      image: require('assets/images/about/share.jpg')
+    }
+  }
+}
+</script>
+```
+
 #### events
 #### store loading
 #### store window
