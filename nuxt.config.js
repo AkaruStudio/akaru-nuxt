@@ -59,7 +59,7 @@ let config = {
     URL: url
   },
   /*
-  ** Headers of the page
+  ** Metas of the page
   */
   head: {
     title,
@@ -109,8 +109,14 @@ let config = {
     src: '~/plugins/EventBus.js',
     ssr: false
   }],
+  /*
+  ** Nuxt hooks
+  */
   hooks: {
     generate: {
+      /*
+      ** Create zip after generation
+      */
       done () {
         if (!zip) return
 
@@ -292,6 +298,9 @@ let config = {
   css: ['@/assets/styles/index.styl']
 }
 
+/*
+** Sitemap
+*/
 if (isProd || isPreprod) {
   config.modules.push('@nuxtjs/sitemap')
   config.sitemap = {
