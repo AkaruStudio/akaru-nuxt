@@ -93,7 +93,7 @@ export default {
       this.lazyloadImage()
     },
     onLoaded () {
-      this.$emit('loaded')
+      this.$emit('loaded', this)
       this.loaded = true
       this.$el.classList.remove('loading')
     }
