@@ -3,9 +3,11 @@
     id="home">
     <div class="container">
       <div class="row center">
-        <h1 class="title">
-          Akaru Nuxt template
-        </h1>
+        <appear name="fade-up">
+          <h1 class="title">
+            Akaru Nuxt template
+          </h1>
+        </appear>
       </div>
 
       <div class="row center collab observe-once">
@@ -35,10 +37,12 @@
 import IntersectionObserverMixin from '~/mixins/IntersectionObserverMixin.js'
 import AppSvg from 'components/AppSvg.vue'
 import AppImage from 'components/AppImage.vue'
+import Appear from 'components/Appear.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
+    Appear,
     AppSvg,
     AppImage
   },
