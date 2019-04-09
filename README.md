@@ -192,7 +192,7 @@ export default {
 - Use an event bus
 - Optimize : cancel event listener when all callbacks are removed
 
-```vue
+```js
 // window click events
 this.$e.on('click', () => console.log('click'))
 // or change target
