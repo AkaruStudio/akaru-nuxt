@@ -5,17 +5,20 @@ var zipFolder = require('zip-folder')
 // all deploy configs per environment
 const PER_DEPLOY_ENV_CONFIGS = {
   base: {
+    baseRouter: '/',
     server: {
       port: 3000,
       host: '0.0.0.0'
     }
   },
   preprod: {
+    baseRouter: '/my-project/',
     server: {
       host: 'http://clients.akaru.fr/my-project'
     }
   },
   prod: {
+    baseRouter: '/',
     server: {
       host: 'http://my-project.fr'
     }
@@ -50,7 +53,13 @@ let config = {
   */
   server: deployEnvironementConfig.server,
   /*
-  ** Headers of the page
+  ** Environnment variables
+  */
+  env: {
+    URL: url
+  },
+  /*
+  ** Metas of the page
   */
   head: {
     title,
@@ -65,7 +74,7 @@ let config = {
       /*
       ** OG share properties
       */
-      { property: 'og:site_name', content: 'My project' },
+      { property: 'og:site_name', content: title },
       { hid: 'og:title', property: 'og:title', content: title },
       { hid: 'og:url', property: 'og:url', content: url },
       { hid: 'og:image', property: 'og:image', content: `${url}/share.jpg` },
@@ -83,6 +92,12 @@ let config = {
     ]
   },
   /*
+  ** Update router config
+  */
+  router: {
+    base: deployEnvironementConfig.baseRouter
+  },
+  /*
   ** Customize the progress bar color
   */
   loading: false,
@@ -94,8 +109,14 @@ let config = {
     src: '~/plugins/EventBus.js',
     ssr: false
   }],
+  /*
+  ** Nuxt hooks
+  */
   hooks: {
     generate: {
+      /*
+      ** Create zip after generation
+      */
       done () {
         if (!zip) return
 
@@ -277,6 +298,9 @@ let config = {
   css: ['@/assets/styles/index.styl']
 }
 
+/*
+** Sitemap
+*/
 if (isProd || isPreprod) {
   config.modules.push('@nuxtjs/sitemap')
   config.sitemap = {
