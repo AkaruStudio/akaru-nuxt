@@ -105,7 +105,39 @@ export default {
 ```
 
 #### images + lazyload
-#### svg
+
+```vue
+<template>
+  <app-image source="http://placecorgi.com/260/180" alt="image" />
+</template>
+
+<script>
+// components
+import AppImage from 'components/AppImage'
+
+export default {
+  components: {
+    AppImage
+  }
+}
+</script>
+```
+
+AppImage component has props:
+
+- `lazyload`: boolean
+- `lazyload-type`: string, one of `direct` (lazyload after page init), `intersection` (use intersection observer to lazyload image when it become visible) or `called` (you have to call `this.$refs.myImage.lazyloadImage()`)
+- `placement`: string, `object-fit` style rule
+- `position`: string, `object-position` style rule
+- `background`: string, background color
+
+And emit `loaded` event
+
+And has `loading` or `loaded` CSS classes
+
+
+
+#### Svg
 
 ```vue
 <template>
@@ -156,5 +188,158 @@ export default {
 ```
 
 #### events
+
+- Use an event bus
+- Optimize : cancel event listener when all callbacks are removed
+
+```vue
+// window click events
+this.$e.on('click', () => console.log('click'))
+// or change target
+this.$e.on({
+  target: document,
+  eventName: 'click'
+}, () => console.log('click'))
+
+// RequestAnimationFrame
+this.$e.on('raf', ({ dt }) => {
+  // console.log('tick', dt)
+})
+// cancelled when all callbacks are removed
+this.$e.off('raf)
+
+// Also work with custom events
+this.$e.on('say_hi', (name) => console.log(`Hello ${name}`))
+this.$e.$emit('say_hi', 'Akaru')
+```
+
+#### Appear component
+
+Add appear animations in component style
+
+```vue
+// components/Appear.vue
+
+<style lang="stylus" scoped>
+  .appearComponent
+    &.fade
+      opacity 0
+      transition opacity 0.5s
+
+      &.in-view
+        opacity 1
+
+    &.fade-up
+      opacity 0
+      transform translateY(30px)
+      transition opacity 0.5s, transform 0.8s
+
+      &.in-view
+        transform translateY(0)
+        opacity 1
+</style>
+```
+
+Then use it 
+
+```vue
+<template>
+  <div>
+    <appear name="fade-up">
+      <h1>Hello</h1>
+    </appear>
+  </div>
+</template>
+
+<script>
+// components
+import Appear from 'components/Appear'
+
+export default {
+  components: {
+    Appear
+  }
+}
+</script>
+```
+
 #### store loading
+
+Keep infos on all XHR requests and assets loading in the `loading` store
+
+```vue
+<template>
+  <div>
+    <p v-if="hasAssetsLoading">
+      Assets loading
+    </p>
+    <p v-if="hasPendingRequest">
+      Pending request
+    </p>
+    <p v-if="isLoading">
+      is loading
+    </p>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters({
+      hasPendingRequest: 'loading/hasPendingRequest',
+      hasAssetsLoading: 'loading/hasAssetsLoading',
+      isLoading: 'loading/isLoading'
+    })
+  },
+  mounted () {
+    /**
+     * XHR requests
+     */
+    this.$store.dispatch('loading/ADD_PENDING_REQUEST')
+    // simulate API call
+    window.setTimeout(() => {
+      this.$store.dispatch('loading/REMOVE_PENDING_REQUEST')
+    }, 1500)
+
+    /**
+     * Assets loading
+     */
+    this.$store.dispatch('loading/ADD_ASSET_LOADING')
+    // simulate ressource loading
+    import('assets/images/home/share.jpg')
+      .then(myFile => {
+        this.$store.dispatch('loading/REMOVE_ASSET_LOADING')
+      })
+  }
+}
+</script>
+```
+
+
 #### store window
+
+All window infos are stored in the `window` store and updated on page resize
+
+```js
+// example of window state populated
+
+{
+  breakpoint: "desktop",
+  browser: {
+    name: "chrome",
+    os: "Mac OS",
+    version: "73.0.3683"
+  },
+  height: 969,
+  isDesktop: true,
+  isLarge: false,
+  isMobile: true,
+  isMobileDevice: false,
+  isTablet: true,
+  isXlarge: false,
+  webgl: true,
+  width: 1014
+}
+```

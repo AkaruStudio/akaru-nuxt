@@ -96,6 +96,7 @@ export default {
   beforeDestroy () {
     this.$e.off('click')
     this.$e.off('say_hi')
+    this.$e.off('raf')
   },
   methods: {
     onImageLoaded () {
