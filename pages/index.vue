@@ -10,6 +10,18 @@
         </appear>
       </div>
 
+      <div class="row">
+        <div>
+          <appear
+            v-for="val in 10"
+            :key="val"
+            name="fade-up"
+            :delay="val/10">
+            <p>test</p>
+          </appear>
+        </div>
+      </div>
+
       <div class="row center collab observe-once">
         <app-svg
           name="nuxt_clean"

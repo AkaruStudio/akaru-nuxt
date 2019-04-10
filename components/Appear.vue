@@ -1,7 +1,10 @@
 <template>
   <div
     class="appearComponent observe-once"
-    :class="name">
+    :class="name"
+    :style="{
+      transitionDelay
+    }">
     <slot />
   </div>
 </template>
@@ -17,6 +20,16 @@ export default {
       type: String,
       required: false,
       default: 'fade'
+    },
+    delay: {
+      type: Number,
+      required: false,
+      default: 0
+    }
+  },
+  computed: {
+    transitionDelay () {
+      return `${this.delay}s`
     }
   }
 }
