@@ -1,24 +1,20 @@
 <template>
   <div id="root">
-    <!-- <span class="bpDebug">
-      breakpoint: {{ bp }}
-    </span> -->
+    <app-debug />
     <nuxt />
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import AppDebug from 'components/AppDebug'
 
 if (process.browser) {
   require('intersection-observer')
 }
 
 export default {
-  computed: {
-    ...mapState({
-      bp: state => state.window.breakpoint
-    })
+  components: {
+    AppDebug
   },
   mounted () {
     this.$e.on('resize', () => {
@@ -31,11 +27,5 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '~@/assets/styles/mixins'
 
-.bpDebug
-  position fixed
-  top 0
-  left 0
-  font()
 </style>
