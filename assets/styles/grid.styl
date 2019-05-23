@@ -44,11 +44,11 @@ column()
 
 size(size)
   column()
-  flex 0 0 floor(percentage(size/columns))
-  max-width floor(percentage(size/columns))
+  flex 0 0 percentage(size/columns)
+  max-width percentage(size/columns)
 
 push(size)
-  margin-left floor(percentage(size/columns))
+  margin-left percentage(size/columns)
 
 .row
   row()
