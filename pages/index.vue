@@ -33,13 +33,15 @@
       </div>
 
       <div class="row">
-        <app-image
-          ref="image"
-          source="http://placecorgi.com/260/180"
-          alt="image"
-          :lazyload="true"
-          lazyload-type="called"
-          @loaded="onImageLoaded" />
+        <div class="image">
+          <app-image
+            ref="image"
+            source="http://placecorgi.com/260/180"
+            alt="image"
+            :lazyload="true"
+            lazyload-type="called"
+            @loaded="onImageLoaded" />
+        </div>
       </div>
     </div>
   </main>
@@ -121,6 +123,7 @@ export default {
 <style lang="stylus" scoped>
   @import '~@/assets/styles/mixins.styl'
   @import '~@/assets/styles/breakpoints.styl'
+  @import '~@/assets/styles/grid.styl'
 
   #home
     height 100vh
@@ -144,4 +147,8 @@ export default {
   .nuxt-icon
     margin 0 30px
     height 80px
+
+  .image
+    margin-top 40px
+    size(5)
 </style>
