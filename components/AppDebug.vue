@@ -39,6 +39,8 @@ export default {
   .debugComponent
     full-parent()
     position fixed
+    z-index 10000
+    pointer-events none
 
   span
     position absolute
