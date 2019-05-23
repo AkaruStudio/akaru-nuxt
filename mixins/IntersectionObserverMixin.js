@@ -1,9 +1,13 @@
-const CLASSES = ['observe', 'observe-once']
+const CLASSES_OBSERVE = 'observe'
+const CLASSES_OBSERVE_ONCE = 'observe-once'
+const DATA_THRESHOLD = 'threshold'
+const INTERSECT_CLASS = 'in-view'
+const DEFAULT_THRESHOLD = [0]
 
 export default {
   data () {
     return {
-      observer: null
+      observers: []
     }
   },
   mounted () {
@@ -11,54 +15,61 @@ export default {
       return
     }
 
-    this.observe()
+    this.IOAutoObserveChildren(this.$el)
   },
   methods: {
-    observe () {
-      let options = {
-        threshold: 0.2
-      }
+    IOCreateObserver (threshold = DEFAULT_THRESHOLD) {
+      let observer = new window.IntersectionObserver(this.IOIntersectionChange, {
+        threshold
+      })
+      this.observers.push(observer)
 
+      return observer
+    },
+    IOGetObserver (threshold = DEFAULT_THRESHOLD) {
+      let observer = this.observers.find(observer => observer.thresholds === threshold)
+
+      return observer || this.IOCreateObserver(threshold)
+    },
+    IOAutoObserveChildren (parent) {
       let observedElements = []
 
       // construct css selector from CLASSES
-      let cssSelector = CLASSES.map(className => `.${className}`).join(', ')
+      let cssSelector = [CLASSES_OBSERVE, CLASSES_OBSERVE_ONCE].map(className => `.${className}`).join(', ')
 
       // observe all elements that have one class from CLASSES
-      observedElements.push(...Array.from(this.$el.querySelectorAll(cssSelector)))
+      observedElements.push(...Array.from(parent.querySelectorAll(cssSelector)))
 
       // observe component top tag if it contains one class from CLASSES
-      if (CLASSES.some(className => this.$el.classList.contains(className))) {
-        observedElements.push(this.$el)
+      if ([CLASSES_OBSERVE, CLASSES_OBSERVE_ONCE].some(className => parent.classList.contains(className))) {
+        observedElements.push(parent)
       }
 
-      if (observedElements.length > 0) {
-        // construct observer
-        this.observer = new window.IntersectionObserver((intersections) => {
-          intersections.forEach(intersection => {
-            if (intersection.isIntersecting) {
-              this.onIntersect(intersection.target)
-            } else {
-              this.onIntersectLeave(intersection.target)
-            }
-          })
-        }, options)
+      observedElements.forEach(el => {
+        let threshold = el.dataset && el.dataset[DATA_THRESHOLD]
+        let observer = this.IOGetObserver(threshold || DEFAULT_THRESHOLD)
 
-        observedElements.forEach(el => this.observer.observe(el))
-      }
+        observer.observe(el)
+      })
     },
-    unobserve (el) {
-      this.observer.unobserve(el)
+    IOIntersectionChange (intersections) {
+      intersections.forEach(intersection => {
+        if (intersection.isIntersecting) {
+          this.onIntersect(intersection.target)
+        } else {
+          this.onIntersectLeave(intersection.target)
+        }
+      })
     },
     onIntersect (el) {
-      el.classList.add('in-view')
+      el.classList.add(INTERSECT_CLASS)
 
-      if (el.classList.contains('observe-once')) {
-        this.observer.unobserve(el)
+      if (el.classList.contains(CLASSES_OBSERVE_ONCE)) {
+        this.observers.forEach(o => o.unobserve(el))
       }
     },
     onIntersectLeave (el) {
-      el.classList.remove('in-view')
+      el.classList.remove(INTERSECT_CLASS)
     }
   }
 }
