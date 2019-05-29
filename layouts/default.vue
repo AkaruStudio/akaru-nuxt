@@ -1,6 +1,6 @@
 <template>
   <div id="root">
-    <app-debug />
+    <app-debug v-if="showDebug" />
     <nuxt />
   </div>
 </template>
@@ -16,13 +16,18 @@ export default {
   components: {
     AppDebug
   },
+  computed: {
+    showDebug () {
+      return process.env.ENV !== 'prod'
+    }
+  },
   mounted () {
     this.$e.on('resize', () => {
       this.$store.dispatch('window/DETECT_BREAKPOINTS')
     })
 
     this.$store.dispatch('window/DETECT_ALL')
-  }
+  },
 }
 </script>
 
