@@ -178,9 +178,11 @@ export default {
   mixins: [MetasMixin],
   data () {
     return {
-      title: 'My project - About',
-      description: 'This is the about page',
-      image: require('assets/images/about/share.jpg')
+      metas: {
+        title: 'My project - About',
+        description: 'This is the about page',
+        image: require('assets/images/about/share.jpg')
+      }
     }
   }
 }
