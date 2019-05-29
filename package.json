@@ -29,7 +29,7 @@
   },
   "private": true,
   "scripts": {
-    "dev": "cross-env DEPLOY_ENV=env nuxt",
+    "dev": "cross-env DEPLOY_ENV=dev nuxt",
     "start": "nuxt start",
     "build": "nuxt build",
     "build:preprod": "cross-env DEPLOY_ENV=preprod nuxt build",
