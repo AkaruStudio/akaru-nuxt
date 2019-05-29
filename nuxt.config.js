@@ -123,7 +123,8 @@ let config = {
         const date = new Date()
         const padLeft = number => number < 10 ? `0${number}` : number
         const outputZip = {
-          filename: `${date.getFullYear()}-${padLeft(date.getMonth() + 1)}-${padLeft(date.getDate())}_${padLeft(date.getHours())}:${padLeft(date.getMinutes())}.zip`,
+          // 'YEAR-MONTH-DAY_HOURS-MINUTES'
+          filename: `${date.getFullYear()}-${padLeft(date.getMonth() + 1)}-${padLeft(date.getDate())}_${padLeft(date.getHours())}-${padLeft(date.getMinutes())}.zip`,
           folder: path.join('./zips')
         }
         outputZip.path = path.join(outputZip.folder, outputZip.filename)
