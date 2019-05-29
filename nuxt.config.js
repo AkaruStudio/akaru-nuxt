@@ -4,7 +4,7 @@ var zipFolder = require('zip-folder')
 
 // all deploy configs per environment
 const PER_DEPLOY_ENV_CONFIGS = {
-  base: {
+  dev: {
     baseRouter: '/',
     server: {
       port: 3000,
@@ -26,9 +26,10 @@ const PER_DEPLOY_ENV_CONFIGS = {
 }
 
 // get deploy environment
-const deployEnvironment = process.env.DEPLOY_ENV || 'base'
-const isPreprod = deployEnvironment === 'preprod'
-const isProd = deployEnvironment === 'prod'
+const deployEnvironment = process.env.DEPLOY_ENV || 'dev'
+const isPreprodEnv = deployEnvironment === 'preprod'
+const isProdEnv = deployEnvironment === 'prod'
+const isDevEnv = deployEnvironment === 'dev'
 
 // get zip option
 let zip = false
@@ -56,7 +57,8 @@ let config = {
   ** Environnment variables
   */
   env: {
-    URL: url
+    URL: url,
+    ENV: deployEnvironment
   },
   /*
   ** Metas of the page
@@ -302,7 +304,7 @@ let config = {
 /*
 ** Sitemap
 */
-if (isProd || isPreprod) {
+if (isProdEnv || isPreprodEnv) {
   config.modules.push('@nuxtjs/sitemap')
   config.sitemap = {
     path: '/sitemap.xml',
