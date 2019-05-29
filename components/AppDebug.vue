@@ -1,5 +1,7 @@
 <template>
-  <div class="debugComponent">
+  <div
+    class="debugComponent"
+    v-show="isActive">
     <span>{{ breakpoint }}</span>
 
     <div class="container fh">
@@ -21,13 +23,19 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      columns: 12
+      columns: 12,
+      isActive: process.env.ENV === 'dev'
     }
   },
   computed: {
     ...mapState({
       breakpoint: state => state.window.breakpoint
     })
+  },
+  mounted () {
+    window.toggleDebug = () => {
+      this.isActive = !this.isActive
+    }
   }
 }
 </script>
