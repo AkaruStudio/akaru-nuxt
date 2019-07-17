@@ -41,6 +41,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@qneyraud/q-image": "^1.2.0",
     "detect-browser": "^4.1.0",
     "intersection-observer": "^0.5.1",
     "nuxt": "^2.0.0"

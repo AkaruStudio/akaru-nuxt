@@ -951,6 +951,14 @@
     mustache "^2.3.0"
     stack-trace "0.0.10"
 
+"@qneyraud/q-image@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@qneyraud/q-image/-/q-image-1.2.0.tgz#c661e70ab5fd1e08e96581fe07f06ed671e19918"
+  integrity sha512-zSuQDwOPxLIj/mcOg81K09mIWfaY1uNjiMURfr9af/Kn5dkwir3wjji98Ntb1w7CFeO5jXybCC9MuLeTkPlVMA==
+  dependencies:
+    core-js "^2.6.5"
+    vue "^2.6.10"
+
 "@types/q@^1.5.1":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"

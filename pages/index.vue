@@ -34,12 +34,11 @@
 
       <div class="row">
         <div class="image">
-          <app-image
+          <q-image
             ref="image"
             source="http://placecorgi.com/260/180"
             alt="image"
-            :lazyload="true"
-            lazyload-type="called"
+            lazyload="called"
             @loaded="onImageLoaded" />
         </div>
       </div>
@@ -49,14 +48,10 @@
 
 <script>
 import IntersectionObserverMixin from '~/mixins/IntersectionObserverMixin.js'
-import AppImage from 'components/AppImage.vue'
 import { mapGetters } from 'vuex'
 import MetasMixin from 'mixins/MetasMixin'
 
 export default {
-  components: {
-    AppImage
-  },
   mixins: [IntersectionObserverMixin, MetasMixin],
   data () {
     return {
