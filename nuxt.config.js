@@ -201,10 +201,18 @@ let config = {
         }
       })
 
+      // svg files ending by '_raw.svg' will not be processed by vue-svg-loader
+      config.module.rules.push({
+        test: /_raw\.svg$/,
+        use: [{
+          loader: 'svg-inline-loader'
+        }]
+      })
+
       // all others SVG files are cleaned
       config.module.rules.push({
         test: /\.svg$/,
-        exclude: /_clean\.svg$/,
+        exclude: [/_clean\.svg$/, /_raw\.svg$/],
         loader: 'vue-svg-loader',
         options: {
           svgo: {
