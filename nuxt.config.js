@@ -110,7 +110,8 @@ let config = {
   plugins: [{
     src: '~/plugins/EventBus.js',
     ssr: false
-  }],
+  },
+  '~/plugins/AutoImport.js'],
   /*
   ** Nuxt hooks
   */

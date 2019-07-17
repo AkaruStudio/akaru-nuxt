@@ -49,16 +49,12 @@
 
 <script>
 import IntersectionObserverMixin from '~/mixins/IntersectionObserverMixin.js'
-import AppSvg from 'components/AppSvg.vue'
 import AppImage from 'components/AppImage.vue'
-import Appear from 'components/Appear.vue'
 import { mapGetters } from 'vuex'
 import MetasMixin from 'mixins/MetasMixin'
 
 export default {
   components: {
-    Appear,
-    AppSvg,
     AppImage
   },
   mixins: [IntersectionObserverMixin, MetasMixin],
