@@ -1,6 +1,9 @@
 <template>
   <div id="root">
+    <!-- Debug -->
     <app-debug v-if="showDebug" />
+
+    <!-- Content -->
     <nuxt />
   </div>
 </template>
