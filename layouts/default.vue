@@ -9,7 +9,11 @@
 </template>
 
 <script>
+// components
 import AppDebug from 'components/AppDebug'
+
+// vuex
+import { mapState } from 'vuex'
 
 if (process.browser) {
   require('intersection-observer')
@@ -22,6 +26,16 @@ export default {
   computed: {
     showDebug () {
       return process.env.ENV !== 'prod'
+    },
+    ...mapState({
+      browser: state => state.window.browser
+    })
+  },
+  watch: {
+    browser (nv) {
+      document.documentElement.dataset.os = nv.os
+      document.documentElement.dataset.name = nv.name
+      document.documentElement.dataset.version = nv.version
     }
   },
   mounted () {
@@ -30,7 +44,7 @@ export default {
     })
 
     this.$store.dispatch('window/DETECT_ALL')
-  },
+  }
 }
 </script>
 
