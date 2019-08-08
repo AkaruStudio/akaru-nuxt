@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { isOneOf } from 'assets/js/validators.js'
+import { isOneOf } from 'assets/js/props-validations.js'
 
 export default {
   props: {
