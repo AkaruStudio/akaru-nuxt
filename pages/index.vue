@@ -1,6 +1,8 @@
 <template>
   <main id="home">
-    <h1>test</h1>
+    <div class="container">
+      <h1>test</h1>
+    </div>
   </main>
 </template>
 

@@ -1,15 +1,13 @@
 @import './breakpoints'
 
 .container
-  padding-left gutter-width
-  padding-right gutter-width
+  position relative
+  padding-left 15px
+  padding-right 15px
   margin-right auto
   margin-left auto
   width 100%
   max-width base-width
-
-  &.fh
-    height 100%
 
   +mobile-up()
     max-width mobile-width
@@ -18,6 +16,8 @@
     max-width tablet-width
 
   +desktop-up()
+    padding-left 0
+    padding-right 0
     max-width desktop-width
 
   +large-up()
@@ -26,13 +26,22 @@
   +xlarge-up()
     max-width xlarge-width
 
+  +xxlarge-up()
+    max-width xxlarge-width
+
+  &.fh
+    height 100%
 
 row()
   display flex
   flex-wrap wrap
-  margin-left -1 * gutter-width
-  margin-right -1 * gutter-width
+  align-items flex-start
+  margin-left -1 * 15px
+  margin-right -1 * 15px
 
+  +desktop-up()
+    margin-left 0
+    margin-right 0
 
 column()
   position relative
@@ -45,10 +54,17 @@ column()
 size(size)
   column()
   flex 0 0 percentage(size/columns)
+  width percentage(size/columns)
   max-width percentage(size/columns)
+
+max-size(size, breakpoint = last-breakpoint)
+  max-width unit(breakpoint * size / columns, 'px')
 
 push(size)
   margin-left percentage(size/columns)
+
+max-push(size, breakpoint = last-breakpoint)
+  margin-left unit(breakpoint * size / columns, 'px')
 
 .row
   row()
@@ -58,6 +74,12 @@ push(size)
 
   &.center
     justify-content center
+
+  &.end
+    justify-content flex-end
+
+  &.sb
+    justify-content space-between
 
   &.v-center
     align-items center

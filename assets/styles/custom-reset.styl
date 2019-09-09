@@ -1,8 +1,9 @@
 html
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
+  backface-visibility hidden
 
-  &:not([data-name=ie])
+  &:not(.ie)
     text-shadow 0 1px 1px rgba(0,0,0,0.004)
 
 button
@@ -13,12 +14,6 @@ button
   margin 0
   padding 0
 
-sup
-  vertical-align super
-
-sub
-  vertical-align sub
-
 a
   text-decoration none
   color #000
@@ -26,7 +21,13 @@ a
 *, *:after, *:before
   box-sizing border-box
 
+sup
+  vertical-align super
+
+sub
+  vertical-align sub
+
 html, body
-  font-size root-font-size
+  font-size root-font-size px
   font-family default-ff
   font-variant-ligatures no-common-ligatures

@@ -1,4 +1,9 @@
 @import './variables'
+@import './easing'
+
+/**
+* Utils
+*/
 
 centered()
   position absolute
@@ -6,17 +11,17 @@ centered()
   left 50%
   transform translate(-50%, -50%)
 
+full-parent()
+  position absolute
+  top 0
+  bottom 0
+  right 0
+  left 0
+
 flex-parent-center()
   display flex
   justify-content center
   align-items center
-
-full-parent()
-  position absolute
-  top 0
-  left 0
-  bottom 0
-  right 0
 
 hidden()
   visibility hidden
@@ -32,24 +37,27 @@ shown()
 
 fsz(value)
   font-size value px
-  font-size (value / root-font-size) rem
 
-font(ff = default-ff, fsz = 16, lh = 16, fw = 400, color = text-color, fs = normal)
+lh(lh, fsz)
+  line-height floor(lh/fsz, 2)
+
+font(ff = default-ff, fsz = 16, lh = 18, fw = 400, color = text-color, fs = normal)
   font-family ff
   fsz(fsz)
   font-weight fw
   font-style fs
   color color
-  line-height floor(lh/fsz, 2)
+  letter-spacing -0.02em
+  lh(lh, fsz)
 
 title()
-  font(roboto-ff, 30, 32, 700, title-color, normal)
+  font(default-ff, 40, 42, 700, title-color, normal)
 
 subtitle()
-  font(roboto-ff, 30, 32, 300, text-color, normal)
+  font(default-ff, 40, 46, 500, subtitle-color, normal)
 
 text()
-  font(roboto-ff, 16, 18, 400, text-color, normal)
+  font(default-ff, 18, 26, 400, text-color, normal)
 
 text-italic()
-  font(roboto-ff, 16, 18, 400, text-color, italic)
+  font(default-ff, 16, 20, 400, text-color, italic)
