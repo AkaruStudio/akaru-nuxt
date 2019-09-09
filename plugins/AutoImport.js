@@ -5,6 +5,11 @@ import QImage from '@qneyraud/q-image'
 import '@qneyraud/q-image/dist/QImage.css'
 Vue.component('QImage', QImage)
 
+// Q-link
+import QLink from '@qneyraud/q-link'
+import '@qneyraud/q-link/dist/QLink.css'
+Vue.component('QLink', QLink)
+
 const requireComponent = require.context('../components/base', true, /[a-zA-Z]*\.vue/)
 
 requireComponent.keys().forEach(function (fileName) {

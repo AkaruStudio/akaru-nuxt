@@ -978,6 +978,14 @@
     core-js "^2.6.5"
     vue "^2.6.10"
 
+"@qneyraud/q-link@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@qneyraud/q-link/-/q-link-1.0.3.tgz#d332f812ed3c173324d8c7d58ab75a31ed1f6bde"
+  integrity sha512-epbnf2fYlxAtZlSO8lC+EiTHRB0h8Sg17n9QFWRmUrup5zplZzYXOqC2IhLorQATMwijFwVJDLEmkdheeU1eCw==
+  dependencies:
+    core-js "^2.6.5"
+    vue "^2.6.10"
+
 "@types/q@^1.5.1":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
