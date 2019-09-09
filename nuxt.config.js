@@ -107,11 +107,11 @@ let config = {
   ** Build configuration
   */
   modules: [],
-  plugins: [{
-    src: '~/plugins/EventBus.js',
-    ssr: false
-  },
-  '~/plugins/AutoImport.js'],
+  plugins: [
+    { src: '~/plugins/event-bus.js', ssr: false },
+    { src: '~/plugins/ticker.js', ssr: false },
+    { src: '~/plugins/resize.js', ssr: false }
+  ],
   /*
   ** Nuxt hooks
   */

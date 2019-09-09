@@ -10,7 +10,7 @@
 
 <script>
 // components
-import AppDebug from 'components/AppDebug'
+import AppDebug from 'components/utils/AppDebug'
 
 // vuex
 import { mapState } from 'vuex'
@@ -39,10 +39,6 @@ export default {
     }
   },
   mounted () {
-    this.$e.on('resize', () => {
-      this.$store.dispatch('window/DETECT_BREAKPOINTS')
-    })
-
     this.$store.dispatch('window/DETECT_ALL')
   }
 }

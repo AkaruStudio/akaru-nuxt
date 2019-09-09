@@ -43,6 +43,7 @@
   "dependencies": {
     "@qneyraud/q-image": "^1.2.0",
     "@qneyraud/q-link": "^1.0.3",
+    "@qneyraud/q-utils": "^1.2.0",
     "detect-browser": "^4.1.0",
     "intersection-observer": "^0.5.1",
     "nuxt": "^2.0.0"
